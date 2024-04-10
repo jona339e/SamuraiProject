@@ -20,17 +20,15 @@ namespace Samurai.Repo.Repositories
         {
             _context.Add(samurai);
             return Save();
-            
         }
 
         public bool Delete(Samurais samurai)
         {
             _context.Remove(samurai);
             return Save();
-
         }
 
-        public Samurais Read(int id)
+        public Samurais GetById(int id)
         {
             return _context.Samurais.FirstOrDefault(x => x.Id == id);
         }
@@ -45,6 +43,11 @@ namespace Samurai.Repo.Repositories
         {
             var saved = _context.SaveChanges();
             return saved > 0;
+        }
+
+        public List<Samurais> GetAll()
+        {
+            return _context.Samurais.ToList();
         }
     }
 }

@@ -4,15 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Samurai.Repo.Models
+namespace Samurai.Repo.DTOs
 {
-    public class Samurais
+    public class KrigerDto
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int Age { get; set; }
-        public List<Kriger> Krigere { get; set; }
-
+        public int Kills { get; set; }
     }
 }

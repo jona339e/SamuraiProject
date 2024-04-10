@@ -16,6 +16,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 
 builder.Services.AddScoped<ISamuraiRepository, SamuraiRepository>();
+builder.Services.AddScoped<IKrigerRepository, KrigerRepository>();
 
 
 builder.Services.AddControllers();

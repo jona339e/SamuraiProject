@@ -9,10 +9,11 @@ namespace Samurai.Repo.Interfaces
 {
     public interface ISamuraiRepository
     {
-        public bool Create(Samurais samurai);
-        public Samurais Read(int id);
-        public bool Update(Samurais samurai);
-        public bool Delete(Samurais samurais);
+        bool Create(Samurais samurai);
+        Samurais GetById(int id);
+        List<Samurais> GetAll();
+        bool Update(Samurais samurai);
+        bool Delete(Samurais samurais);
 
     }
 }

@@ -16,5 +16,12 @@ namespace Samurai.Repo.Data
 
         }
         public DbSet<Samurais> Samurais { get; set; }
+        public DbSet<Kriger> Kriger { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+
+        }
     }
 }
