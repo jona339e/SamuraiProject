@@ -3,6 +3,7 @@ using Samurai.Api;
 using Samurai.Repo.Data;
 using Samurai.Repo.Interfaces;
 using Samurai.Repo.Repositories;
+using Samurai.Repo.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,9 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 builder.Services.AddScoped<ISamuraiRepository, SamuraiRepository>();
 builder.Services.AddScoped<IKrigerRepository, KrigerRepository>();
+
+
+builder.Services.AddScoped<IMappingService, MappingService>();
 
 
 builder.Services.AddControllers();

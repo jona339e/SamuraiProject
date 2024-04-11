@@ -11,7 +11,7 @@ namespace Samurai.Repo.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int Age { get; set; }
+        public int Age { get; set; }    
         public List<Kriger> Krigere { get; set; }
 
     }

@@ -1,6 +1,17 @@
-@Samurai.Api_HostAddress = http://localhost:5130
+@Samurai.Api_HostAddress = https://localhost:7072/api
 
-GET {{Samurai.Api_HostAddress}}/weatherforecast/
+GET {{Samurai.Api_HostAddress}}/Samurai/
 Accept: application/json
 
 ###
+
+
+POST {{Samurai.Api_HostAddress}}/Samurai/
+Content-Type: application/json
+
+{
+  "Name": "John",
+  "Description": "A Samurai Jack",
+  "Age": 29
+
+}
