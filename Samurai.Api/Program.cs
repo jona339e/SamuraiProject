@@ -14,6 +14,19 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddCors(options =>
+{
+    var allowedOrigins = "*";
+
+    options.AddDefaultPolicy(policy =>
+    {
+
+        policy.WithOrigins(allowedOrigins)
+              .WithHeaders("Content-Type", "Authorization", "Access-Control-Allow-Headers", "Access-Control-Allow-Origin")
+              .WithMethods("GET", "POST", "PUT", "DELETE", "PATCH");
+    });
+});
+
 
 
 builder.Services.AddScoped<ISamuraiRepository, SamuraiRepository>();
@@ -38,6 +51,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 
