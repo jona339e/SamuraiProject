@@ -1,4 +1,6 @@
-﻿using Samurai.Repo.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using Samurai.Repo.Data;
+using Samurai.Repo.Interfaces;
 using Samurai.Repo.Models;
 using System;
 using System.Collections.Generic;
@@ -10,14 +12,22 @@ namespace Samurai.Repo.Repositories
 {
     public class TasteRepository : ITasteRepository
     {
-        public Task<Taste> Create(Coffee model)
+        private readonly DataContext _context;
+        public TasteRepository(DataContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+        public async Task<Taste> Create(Taste model)
+        {
+            var result = await _context.Taste.AddAsync(model);
+            if (_context.SaveChanges() >= 0)
+                return result.Entity;
+            throw new Exception("Could not create taste");
         }
 
-        public Task<List<Taste>> GetAll()
+        public async Task<List<Taste>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _context.Taste.ToListAsync();
         }
     }
 }

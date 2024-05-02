@@ -9,7 +9,7 @@ namespace Samurai.Repo.Interfaces
 {
     public interface ITasteRepository
     {
-        public Task<Taste> Create(Coffee model);
+        public Task<Taste> Create(Taste model);
         public Task<List<Taste>> GetAll();
     }
 }
