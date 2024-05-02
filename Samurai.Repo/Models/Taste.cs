@@ -11,7 +11,6 @@ namespace Samurai.Repo.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-
-        public ICollection<Coffee> Coffee { get; set; }
+        public ICollection<CoffeeTaste> CoffeeTaste { get; set; }
     }
 }

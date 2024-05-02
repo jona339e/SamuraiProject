@@ -11,5 +11,7 @@ namespace Samurai.Repo.Interfaces
     {
         public Task<Coffee> Create(Coffee model);
         public Task<List<Coffee>> GetAll();
+        public Task<Coffee> GetByName(string name);
+        public Task<Coffee> Update(Coffee model);
     }
 }

@@ -29,5 +29,18 @@ namespace Samurai.Repo.Repositories
         {
             return await _context.Taste.ToListAsync();
         }
+
+        public async Task<Taste> GetByName(string name)
+        {
+            return await _context.Taste.FirstOrDefaultAsync(x => x.Name == name);
+        }
+
+        public Task<Taste> Update(Taste model)
+        {
+            var result = _context.Taste.Update(model);
+            if (_context.SaveChanges() >= 0)
+                return Task.FromResult(result.Entity);
+            throw new Exception("Could not update taste");
+        }
     }
 }

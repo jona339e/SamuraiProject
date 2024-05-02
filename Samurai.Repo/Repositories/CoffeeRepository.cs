@@ -27,7 +27,26 @@ namespace Samurai.Repo.Repositories
 
         public async Task<List<Coffee>> GetAll()
         {
-            return await _context.Coffees.ToListAsync();
+            return await _context.Coffees.Include(x => x.CoffeeTastes).ThenInclude(x => x.Taste).ToListAsync();
+        }
+
+        public async Task<Coffee> GetByName(string name)
+        {
+            return await _context.Coffees.FirstOrDefaultAsync(x => x.Name == name);
+        }
+
+        public async Task<Taste> GetTaste(int id)
+        {
+            return await _context.Taste.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<Coffee> Update(Coffee model)
+        {
+            var result = _context.Coffees.Update(model);
+            if (_context.SaveChanges() >= 0)
+                return result.Entity;
+
+            throw new Exception("Could not update coffee");
         }
     }
 }

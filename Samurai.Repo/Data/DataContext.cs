@@ -23,12 +23,24 @@ namespace Samurai.Repo.Data
         public DbSet<War> Wars { get; set; }
         public DbSet<Coffee> Coffees { get; set; }
         public DbSet<Taste> Taste { get; set; }
+        public DbSet<CoffeeTaste> CoffeeTastes { get; set; }
 
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<CoffeeTaste>()
+                .HasKey(ct => new { ct.CoffeeId, ct.TasteId });
 
+            modelBuilder.Entity<CoffeeTaste>()
+                .HasOne(ct => ct.Coffee)
+                .WithMany(c => c.CoffeeTastes)
+                .HasForeignKey(ct => ct.CoffeeId);
+
+            modelBuilder.Entity<CoffeeTaste>()
+                .HasOne(ct => ct.Taste)
+                .WithMany(t => t.CoffeeTaste)
+                .HasForeignKey(ct => ct.TasteId);
 
         }
     }

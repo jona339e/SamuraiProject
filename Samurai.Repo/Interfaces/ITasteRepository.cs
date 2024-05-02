@@ -11,5 +11,7 @@ namespace Samurai.Repo.Interfaces
     {
         public Task<Taste> Create(Taste model);
         public Task<List<Taste>> GetAll();
+        public Task<Taste> GetByName(string name);
+        public Task<Taste> Update(Taste model);
     }
 }

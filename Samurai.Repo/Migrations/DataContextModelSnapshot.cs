@@ -36,6 +36,38 @@ namespace Samurai.Repo.Migrations
                     b.ToTable("KrigerSamurais");
                 });
 
+            modelBuilder.Entity("Samurai.Repo.Models.Coffee", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Coffees");
+                });
+
+            modelBuilder.Entity("Samurai.Repo.Models.CoffeeTaste", b =>
+                {
+                    b.Property<int>("CoffeeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TasteId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CoffeeId", "TasteId");
+
+                    b.HasIndex("TasteId");
+
+                    b.ToTable("CoffeeTastes");
+                });
+
             modelBuilder.Entity("Samurai.Repo.Models.Kriger", b =>
                 {
                     b.Property<int>("Id")
@@ -103,6 +135,27 @@ namespace Samurai.Repo.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Samurais");
+                });
+
+            modelBuilder.Entity("Samurai.Repo.Models.Taste", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Taste");
                 });
 
             modelBuilder.Entity("Samurai.Repo.Models.TestModel", b =>
@@ -184,6 +237,25 @@ namespace Samurai.Repo.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Samurai.Repo.Models.CoffeeTaste", b =>
+                {
+                    b.HasOne("Samurai.Repo.Models.Coffee", "Coffee")
+                        .WithMany("CoffeeTastes")
+                        .HasForeignKey("CoffeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Samurai.Repo.Models.Taste", "Taste")
+                        .WithMany("CoffeeTaste")
+                        .HasForeignKey("TasteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Coffee");
+
+                    b.Navigation("Taste");
+                });
+
             modelBuilder.Entity("Samurai.Repo.Models.War", b =>
                 {
                     b.HasOne("Samurai.Repo.Models.Ninja", "Ninjas")
@@ -203,9 +275,19 @@ namespace Samurai.Repo.Migrations
                     b.Navigation("Vikings");
                 });
 
+            modelBuilder.Entity("Samurai.Repo.Models.Coffee", b =>
+                {
+                    b.Navigation("CoffeeTastes");
+                });
+
             modelBuilder.Entity("Samurai.Repo.Models.Ninja", b =>
                 {
                     b.Navigation("Wars");
+                });
+
+            modelBuilder.Entity("Samurai.Repo.Models.Taste", b =>
+                {
+                    b.Navigation("CoffeeTaste");
                 });
 
             modelBuilder.Entity("Samurai.Repo.Models.Viking", b =>
