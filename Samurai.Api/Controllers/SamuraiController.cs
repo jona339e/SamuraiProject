@@ -48,10 +48,19 @@ namespace Samurai.Api.Controllers
         }
 
         [HttpDelete]
-        public IActionResult Delete(SamuraiDto samurai)
+        public IActionResult Delete([FromBody]SamuraiDto samurai)
         {
             var result = _samuraRepository.Delete(_mappingService.SamuraiDtoToSamurais(samurai));
             return Ok(result);
         }
+
+        [HttpDelete("/test")]
+        public IActionResult Delete([FromBody] TestModel model) 
+        {
+            var result = _samuraRepository.DeleteTest(model);
+
+            return Ok(result);
+        }
+
     }
 }

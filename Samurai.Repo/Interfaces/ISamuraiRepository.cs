@@ -14,6 +14,7 @@ namespace Samurai.Repo.Interfaces
         List<Samurais> GetAll();
         bool Update(Samurais samurai);
         bool Delete(Samurais samurais);
+        bool DeleteTest(TestModel model);
 
     }
 }

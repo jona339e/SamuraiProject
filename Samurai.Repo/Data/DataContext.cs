@@ -17,6 +17,14 @@ namespace Samurai.Repo.Data
         }
         public DbSet<Samurais> Samurais { get; set; }
         public DbSet<Kriger> Kriger { get; set; }
+        public DbSet<TestModel> TestModels { get; set; }
+        public DbSet<Ninja> Ninjas { get; set; }
+        public DbSet<Viking> Vikings { get; set; }
+        public DbSet<War> Wars { get; set; }
+        public DbSet<Coffee> Coffees { get; set; }
+        public DbSet<Taste> Taste { get; set; }
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -24,7 +24,7 @@ namespace Samurai.Repo.Repositories
 
         public bool Delete(Samurais samurai)
         {
-            _context.Remove(samurai);
+            _context.Samurais.Remove(samurai);
             return Save();
         }
 
@@ -48,6 +48,12 @@ namespace Samurai.Repo.Repositories
         public List<Samurais> GetAll()
         {
             return _context.Samurais.ToList();
+        }
+
+        public bool DeleteTest(TestModel model)
+        {
+            _context.TestModels.Remove(model);
+            return Save();
         }
     }
 }

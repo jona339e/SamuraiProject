@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Samurai.Repo.Data;
 
@@ -10,9 +11,11 @@ using Samurai.Repo.Data;
 namespace Samurai.Repo.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240425064134_war2")]
+    partial class war2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,6 +37,21 @@ namespace Samurai.Repo.Migrations
                     b.HasIndex("SamuraisId");
 
                     b.ToTable("KrigerSamurais");
+                });
+
+            modelBuilder.Entity("NinjaWar", b =>
+                {
+                    b.Property<int>("NinjasId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WarsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("NinjasId", "WarsId");
+
+                    b.HasIndex("WarsId");
+
+                    b.ToTable("NinjaWar");
                 });
 
             modelBuilder.Entity("Samurai.Repo.Models.Kriger", b =>
@@ -154,19 +172,24 @@ namespace Samurai.Repo.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NinjasId")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
+                    b.ToTable("Wars");
+                });
+
+            modelBuilder.Entity("VikingWar", b =>
+                {
                     b.Property<int>("VikingsId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int>("WarsId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("NinjasId");
+                    b.HasKey("VikingsId", "WarsId");
 
-                    b.HasIndex("VikingsId");
+                    b.HasIndex("WarsId");
 
-                    b.ToTable("Wars");
+                    b.ToTable("VikingWar");
                 });
 
             modelBuilder.Entity("KrigerSamurais", b =>
@@ -184,33 +207,34 @@ namespace Samurai.Repo.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Samurai.Repo.Models.War", b =>
+            modelBuilder.Entity("NinjaWar", b =>
                 {
-                    b.HasOne("Samurai.Repo.Models.Ninja", "Ninjas")
-                        .WithMany("Wars")
+                    b.HasOne("Samurai.Repo.Models.Ninja", null)
+                        .WithMany()
                         .HasForeignKey("NinjasId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Samurai.Repo.Models.Viking", "Vikings")
-                        .WithMany("Wars")
+                    b.HasOne("Samurai.Repo.Models.War", null)
+                        .WithMany()
+                        .HasForeignKey("WarsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("VikingWar", b =>
+                {
+                    b.HasOne("Samurai.Repo.Models.Viking", null)
+                        .WithMany()
                         .HasForeignKey("VikingsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Ninjas");
-
-                    b.Navigation("Vikings");
-                });
-
-            modelBuilder.Entity("Samurai.Repo.Models.Ninja", b =>
-                {
-                    b.Navigation("Wars");
-                });
-
-            modelBuilder.Entity("Samurai.Repo.Models.Viking", b =>
-                {
-                    b.Navigation("Wars");
+                    b.HasOne("Samurai.Repo.Models.War", null)
+                        .WithMany()
+                        .HasForeignKey("WarsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

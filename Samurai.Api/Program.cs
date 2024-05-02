@@ -14,6 +14,8 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+
+
 builder.Services.AddCors(options =>
 {
     var allowedOrigins = "*";
@@ -31,7 +33,8 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddScoped<ISamuraiRepository, SamuraiRepository>();
 builder.Services.AddScoped<IKrigerRepository, KrigerRepository>();
-
+builder.Services.AddScoped<ICoffeeRepository, CoffeeRepository>();
+builder.Services.AddScoped<ITasteRepository, TasteRepository>();
 
 builder.Services.AddScoped<IMappingService, MappingService>();
 
