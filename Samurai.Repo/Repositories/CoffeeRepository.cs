@@ -32,7 +32,10 @@ namespace Samurai.Repo.Repositories
 
         public async Task<Coffee> GetByName(string name)
         {
-            return await _context.Coffees.FirstOrDefaultAsync(x => x.Name == name);
+            // return null if no coffee was found
+            return await _context.Coffees.FirstOrDefaultAsync(x => x.Name == name) ?? null;
+
+
         }
 
         public async Task<Taste> GetTaste(int id)
